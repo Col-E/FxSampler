@@ -1,5 +1,6 @@
 package software.coley.fx.util;
 
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
@@ -14,10 +15,10 @@ import java.nio.file.Path;
 import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.stream.Collectors;
 
 /**
  * Tossed all the IO operations in here.
@@ -53,12 +54,11 @@ public class FileUtil {
 			path = path.getParent();
 		}
 		System.out.println("Refresh CSS from path: " + path);
-		List<String> list = scene.getStylesheets();
-		list.clear();
+		ObservableList<String> list = scene.getStylesheets();
 		try {
-			Files.walk(path)
+			list.setAll(Files.walk(path)
 					.map(subpath -> "file:///" + subpath.toFile().getAbsolutePath().replace("\\", "/"))
-					.forEach(list::add);
+					.collect(Collectors.toList()));
 		} catch (IOException ex) {
 			ex.printStackTrace();
 			Toolkit.getDefaultToolkit().beep();
