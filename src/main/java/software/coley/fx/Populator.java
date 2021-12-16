@@ -25,6 +25,7 @@ import software.coley.fx.provider.ProgressProvider;
 import software.coley.fx.provider.RadioProvider;
 import software.coley.fx.provider.SliderProvider;
 import software.coley.fx.provider.SpinnerProvider;
+import software.coley.fx.provider.TableProvider;
 import software.coley.fx.provider.TabsProvider;
 import software.coley.fx.provider.TextfieldProvider;
 import software.coley.fx.provider.TreeProvider;
@@ -129,11 +130,12 @@ public class Populator {
 		COLUMN_CONTROL_PROVIDERS.add(new ComboboxProvider());
 		COLUMN_CONTROL_PROVIDERS.add(new SpinnerProvider());
 		COLUMN_CONTROL_PROVIDERS.add(new TextfieldProvider());
+		VARIABLE_CONTROL_PROVIDERS.add(new TabsProvider());
 		VARIABLE_CONTROL_PROVIDERS.add(new SliderProvider());
 		VARIABLE_CONTROL_PROVIDERS.add(new ProgressProvider(false));
 		VARIABLE_CONTROL_PROVIDERS.add(new ProgressProvider(true));
+		VARIABLE_CONTROL_PROVIDERS.add(new TableProvider());
 		VARIABLE_CONTROL_PROVIDERS.add(new ListProvider());
 		VARIABLE_CONTROL_PROVIDERS.add(new TreeProvider());
-		VARIABLE_CONTROL_PROVIDERS.add(new TabsProvider());
 	}
 }
