@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
  * @author Matt Coley
  */
 public class FileUtil {
-	private static final ExecutorService THREAD_POOL = Executors.newSingleThreadExecutor();
+	private static final ExecutorService THREAD_POOL = Executors.newSingleThreadExecutor(FileUtil::newThread);
 	private static Future<?> fileWatchThread;
 
 	public static void registerRefreshWatch(Scene scene, Path path) {
@@ -88,5 +88,11 @@ public class FileUtil {
 				Toolkit.getDefaultToolkit().beep();
 			}
 		}).start();
+	}
+
+	private static Thread newThread(Runnable r) {
+		Thread t = new Thread(r);
+		t.setDaemon(true);
+		return t;
 	}
 }
